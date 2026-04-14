@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Producto TDEA</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --text: #e8ecf1;
+      --muted: #8b9aab;
+      --accent: #3d9cf5;
+      --accent-dim: #2b7bc4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+    }
+
+    section {
+      margin-top: 2.5rem;
+    }
+
+    h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 560px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.25rem 1.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .links {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+
+    .links li {
+      margin-top: 0.65rem;
+    }
+
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+      color: var(--accent-dim);
+    }
+
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="badge">Spring Boot · JPA · H2</p>
+      <h1>Producto TDEA</h1>
+      <p class="lead">
+        Backend en construcción para la gestión de productos. Esta es la página principal
+        servida desde <code>src/main/resources/static</code>.
+      </p>
+    </header>
+
+    <section aria-labelledby="stack-title">
+      <h2 id="stack-title">Stack</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>API REST</h3>
+          <p>Spring Web 3.x y capa de persistencia con Spring Data JPA.</p>
+        </div>
+        <div class="card">
+          <h3>Base de datos</h3>
+          <p>H2 en memoria para desarrollo, con consola web habilitada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="dev-title">
+      <h2 id="dev-title">Enlaces de desarrollo</h2>
+      <ul class="links">
+        <li><a href="/actuator/health">Estado del servicio (Actuator)</a></li>
+        <li><a href="/h2-console">Consola H2</a> — JDBC URL: <code>jdbc:h2:mem:prod_tdea</code>, usuario <code>sa</code></li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>producto-tdea · com.tdea</p>
+  </footer>
+</body>
+</html>
