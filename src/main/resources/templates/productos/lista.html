@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos</title>
+  <style>
+    :root { --bg:#0f1419; --surface:#1a2332; --text:#e8ecf1; --muted:#8b9aab; --accent:#3d9cf5; --danger:#f06a6a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    header { display:flex; gap:1rem; align-items:center; justify-content:space-between; margin-bottom: 1.25rem; }
+    h1 { font-size: 1.5rem; margin:0; }
+    a.btn, button.btn { display:inline-block; padding:.55rem .9rem; border-radius:10px; border: 1px solid rgba(255,255,255,.12); background: var(--surface); color: var(--text); text-decoration:none; cursor:pointer; }
+    a.btn.primary { background: var(--accent); border-color: transparent; color: #04121f; font-weight: 700; }
+    .card { background: var(--surface); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 1rem; }
+    .msg { margin-bottom: 1rem; padding:.75rem 1rem; border-radius: 10px; border:1px solid rgba(255,255,255,.10); }
+    .msg.error { border-color: rgba(240,106,106,.35); color: #ffd2d2; }
+    .msg.ok { border-color: rgba(61,156,245,.35); color: #d8ecff; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { text-align:left; padding:.75rem .6rem; border-bottom:1px solid rgba(255,255,255,.08); }
+    th { color: var(--muted); font-size:.85rem; text-transform: uppercase; letter-spacing:.06em; }
+    td { vertical-align: middle; }
+    .actions { display:flex; gap:.5rem; flex-wrap: wrap; justify-content:flex-end; }
+    button.danger { border-color: rgba(240,106,106,.35); color:#ffd2d2; }
+    code { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Productos</h1>
+        <div style="color:var(--muted); font-size:.95rem;">CRUD interactivo vía Thymeleaf</div>
+      </div>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+        <a class="btn" href="/">Inicio</a>
+        <a class="btn" href="/swagger-ui/index.html">Swagger</a>
+        <a class="btn primary" href="/productos/nuevo">Nuevo producto</a>
+      </div>
+    </header>
+
+    <div th:if="${error != null}" class="msg error" th:text="${error}"></div>
+    <div th:if="${ok != null}" class="msg ok" th:text="${ok}"></div>
+
+    <div class="card">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th style="text-align:right;">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(productos)}">
+          <td colspan="4" style="color:var(--muted);">No hay productos. Crea uno con <code>Nuevo producto</code>.</td>
+        </tr>
+        <tr th:each="p : ${productos}">
+          <td th:text="${p.id}"></td>
+          <td th:text="${p.nombre}"></td>
+          <td th:text="${p.precio}"></td>
+          <td>
+            <div class="actions">
+              <a class="btn" th:href="@{/productos/editar/{id}(id=${p.id})}">Editar</a>
+              <form th:action="@{/productos/eliminar/{id}(id=${p.id})}" method="post" style="margin:0;">
+                <button class="btn danger" type="submit">Eliminar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+
